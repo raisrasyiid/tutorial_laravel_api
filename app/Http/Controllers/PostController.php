@@ -20,8 +20,12 @@ class PostController extends Controller
     }
 
     public function show($id){
+        $post = Post::with('writer:id,username')->findOrFail($id);
+        return new PostDetailResource($post);
+    }
+
+    public function showDetailWithOutWriter($id){
         $post = Post::findOrFail($id);
-        //menggunakan "new" jika ingin menampilkan data detail (1 data saja)
         return new PostDetailResource($post);
     }
 }
