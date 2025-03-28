@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    // login
     public function login(Request $request){
 
         //cek validate form
@@ -33,11 +34,12 @@ class AuthController extends Controller
 
     return response()->json([
         'status' => 'Login successfully',
-        'message' => 'Token : ' . $token
+        'token' =>  $token
     ], 200);
 
     }
 
+    // logout
     public function logout(Request $request){
         $token = $request->user()->currentAccessToken()->delete();
 
@@ -46,6 +48,7 @@ class AuthController extends Controller
         ], 200);
     }
 
+    // cek siapa yang sedang login
     public function userLogin(Request $request){
         return response()->json(Auth::user());
     }
